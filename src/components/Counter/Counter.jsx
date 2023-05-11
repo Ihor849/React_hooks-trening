@@ -4,6 +4,7 @@ import styles from './Counter.module.css';
 export default function Counter() {
   const [counterA, setCounterA] = useState(0);
   const [counterB, setCounterB] = useState(0);
+  const [totalClicks, settotalClicks] = useState(0);
 
   const handleCounterAIncrement = () => {
     setCounterA(prevState => prevState + 1);
@@ -11,14 +12,13 @@ export default function Counter() {
   const handleCounterBIncrement = () => {
     setCounterB(prevState => prevState + 1);
   };
+
   useEffect(() => {
+    const nweTotalClicks = counterA + counterB;
+    settotalClicks(nweTotalClicks);
     console.log('Запускается useEffect ' + Date.now());
-    const totalClicks = counterA + counterB;
-    console.log(totalClicks);
-    document.title = `Всего кликнули ${totalClicks} раз`;
-    console.log(document.title);
   }, [counterA, counterB]);
-  console.log(document.title);
+
   return (
     <>
       <button
@@ -28,7 +28,7 @@ export default function Counter() {
       >
         Кликнули counterA {counterA} раз
       </button>
-      <h2>{document.title}</h2>
+      <h2>`Всего кликнули {totalClicks} раз`</h2>
       <button
         className={styles.btn}
         type="button"

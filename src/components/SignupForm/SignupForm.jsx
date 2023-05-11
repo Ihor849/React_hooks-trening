@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import useLocalStorage from '../../hooks/useLocalStorage';
 import styles from './SignupForm.module.css';
 
 // console.log(undefined || 1);
@@ -10,16 +10,17 @@ import styles from './SignupForm.module.css';
 // console.log(0 ?? 1);
 // console.log(false || 1);
 // console.log(false ?? 1);
-const useLocalStorage = (key, defaultValue) => {
-  const [state, setState] = useState(() => {
-    return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;
-  });
 
-  useEffect(() => {
-    window.localStorage.setItem(key, JSON.stringify(state));
-  }, [key, state]);
-  return [state, setState];
-};
+// const useLocalStorage = (key, defaultValue) => {
+//   const [state, setState] = useState(() => {
+//     return JSON.parse(window.localStorage.getItem(key)) ?? defaultValue;
+//   });
+
+//   useEffect(() => {
+//     window.localStorage.setItem(key, JSON.stringify(state));
+//   }, [key, state]);
+//   return [state, setState];
+// };
 //вызывается 1 раз при инициализации(после игнорируется) необходимо передать ананимную функцию
 export default function SignupForm() {
   const [email, setEmail] = useLocalStorage('email', '');
